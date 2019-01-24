@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MiCarro</string>
+    <string name="label_nombre">Nombre</string>
+    <string name="label_activo">Activo</string>
+</resources>
