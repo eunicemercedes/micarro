@@ -16,7 +16,7 @@ public abstract class MiCarroDB extends RoomDatabase {
             INSTANCE =
                     Room.databaseBuilder(context.getApplicationContext(),
                             MiCarroDB.class, "MiCarro-Database.db")
-                            .allowMainThreadQueries()
+                            //.allowMainThreadQueries()
                             .build();
         }
         return INSTANCE;

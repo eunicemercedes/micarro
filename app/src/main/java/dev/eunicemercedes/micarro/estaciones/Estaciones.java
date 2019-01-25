@@ -24,6 +24,23 @@ public class Estaciones {
         this.activo = activo;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    @Override
+    public String toString() {
+        return "Estaciones{" +
+                "codigoEstacion=" + codigoEstacion +
+                ", nombre='" + nombre + '\'' +
+                ", activo=" + activo +
+                '}';
+    }
+
     public int getCodigoEstacion() {
         return codigoEstacion;
     }

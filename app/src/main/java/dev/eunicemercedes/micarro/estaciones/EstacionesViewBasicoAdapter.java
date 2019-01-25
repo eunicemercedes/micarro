@@ -1,32 +1,42 @@
 package dev.eunicemercedes.micarro.estaciones;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
 
+import dev.eunicemercedes.micarro.MiCarroDB;
 import dev.eunicemercedes.micarro.R;
 
 public class EstacionesViewBasicoAdapter extends RecyclerView.Adapter<EstacionesViewBasicoAdapter.EstacionesViewHolder> {
     private List<Estaciones> estacionesList;
     private Context contexto;
 
-    public EstacionesViewBasicoAdapter(List<Estaciones> estacionesList, Context contexto) {
-        this.estacionesList = estacionesList;
+    public EstacionesViewBasicoAdapter(Context contexto) {
         this.contexto = contexto;
+        MiCarroDB.getINSTANCE(contexto).miVehiculosDao().listarEstaciones().observeForever(
+                new Observer<List<Estaciones>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Estaciones> estaciones) {
+                        estacionesList = estaciones;
+                        notifyDataSetChanged();
+                    }
+                }
+        );
     }
 
-    public void actualizarEstacionesList(List<Estaciones> estacionesList) {
-        this.estacionesList = estacionesList;
-        notifyDataSetChanged();
-    }
 
     @NonNull
     @Override
@@ -58,19 +68,23 @@ public class EstacionesViewBasicoAdapter extends RecyclerView.Adapter<Estaciones
 
     @Override
     public int getItemCount() {
-        return estacionesList.size();
+        if (estacionesList != null) {
+            return estacionesList.size();
+        } else {
+            return 0;
+        }
     }
 
     class EstacionesViewHolder extends RecyclerView.ViewHolder {
         TextView nombre;
         CheckBox activo;
-        FloatingActionButton editFloatinActionButton;
+        ImageButton editFloatinActionButton;
 
         public EstacionesViewHolder(@NonNull View itemView) {
             super(itemView);
             nombre = (TextView) itemView.findViewById(R.id.nombreEditText);
             activo = (CheckBox) itemView.findViewById(R.id.activoCheckBox);
-            editFloatinActionButton = (FloatingActionButton) itemView.findViewById(R.id.editFloatinActionButton);
+            //  editFloatinActionButton = (FloatingActionButton) itemView.findViewById(R.id.editFloatinActionButton);
         }
 
         //1:
@@ -78,14 +92,14 @@ public class EstacionesViewBasicoAdapter extends RecyclerView.Adapter<Estaciones
             Estaciones estacion = estacionesList.get(position);
             nombre.setText(estacion.getNombre());
             activo.setChecked(estacion.isActivo());
-            editFloatinActionButton.setOnClickListener(new View.OnClickListener() {
+         /*   editFloatinActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //TODO: Codigo al boton para abrir el activity de edit
-
+                        notifyDataSetChanged();
                 }
-            });
-            notifyDataSetChanged();
+            });*/
+
         }
     }
 }
