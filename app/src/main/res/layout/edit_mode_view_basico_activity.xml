@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/label_nombre"
         android:inputType="textCapWords"
+
         app:layout_constraintBottom_toTopOf="@+id/activoCheckBox"
         app:layout_constraintStart_toStartOf="@+id/activoCheckBox" />
 

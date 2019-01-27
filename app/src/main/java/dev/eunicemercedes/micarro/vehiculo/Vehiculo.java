@@ -1,4 +1,4 @@
-package dev.eunicemercedes.micarro;
+package dev.eunicemercedes.micarro.vehiculo;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.util.Date;
 
 @Entity(tableName = "Vehiculos")
-public class Vehiculos {
+public class Vehiculo {
 
 
     @PrimaryKey(autoGenerate = true)
@@ -27,7 +27,7 @@ public class Vehiculos {
     @ColumnInfo(name = "Activo")
     private boolean activo;
 
-    public Vehiculos(int idModelo, String nombre, String fechaInicio, boolean activo) {
+    public Vehiculo(int idModelo, String nombre, String fechaInicio, boolean activo) {
 
         this.idModelo = idModelo;
         this.nombre = nombre;
@@ -37,7 +37,7 @@ public class Vehiculos {
 
     @Override
     public String toString() {
-        return "Vehiculos{" +
+        return "Vehiculo{" +
                 "codigoVehiculo=" + codigoVehiculo +
                 ", idModelo=" + idModelo +
                 ", nombre='" + nombre + '\'' +
@@ -50,7 +50,7 @@ public class Vehiculos {
         return codigoVehiculo;
     }
 
-    void setCodigoVehiculo(int codigoVehiculo) {
+    public void setCodigoVehiculo(int codigoVehiculo) {
         this.codigoVehiculo = codigoVehiculo;
     }
 

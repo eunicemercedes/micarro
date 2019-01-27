@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.eunicemercedes.micarro">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,9 +12,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".estaciones.AddEstacionesActivity" />
-        <activity android:name=".estaciones.EstacionesListActivity" />
 
-        <activity android:name=".metododepago.MetodoDePagoListActivity">
+        <activity android:name=".estaciones.EstacionesListActivity" />
+        <activity android:name=".modelo.ModeloListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +25,7 @@
         <activity android:name=".tipomantenimiento.AddTipoMantenimientoActivity" />
         <activity android:name=".tipomantenimiento.TipoMantenimientoListActivity" />
         <activity android:name=".metododepago.AddMetodoDePagoActivity" />
+        <activity android:name=".metododepago.MetodoDePagoListActivity" />
     </application>
 
 </manifest>

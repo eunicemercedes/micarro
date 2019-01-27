@@ -1,8 +1,7 @@
-package dev.eunicemercedes.micarro.estaciones;
+package dev.eunicemercedes.micarro.modelo;
 
 import android.arch.lifecycle.Observer;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -18,17 +17,17 @@ import java.util.List;
 import dev.eunicemercedes.micarro.MiCarroDB;
 import dev.eunicemercedes.micarro.R;
 
-public class EstacionesViewBasicoAdapter extends RecyclerView.Adapter<EstacionesViewBasicoAdapter.EstacionesViewHolder> {
-    private List<Estacion> estacionList;
+public class ModeloViewBasicoAdapter extends RecyclerView.Adapter<ModeloViewBasicoAdapter.ModelosViewHolder> {
+    private List<Modelo> modeloList;
     private Context contexto;
 
-    public EstacionesViewBasicoAdapter(Context contexto) {
+    public ModeloViewBasicoAdapter(Context contexto) {
         this.contexto = contexto;
-        MiCarroDB.getINSTANCE(contexto).miVehiculosDao().listarEstaciones().observeForever(
-                new Observer<List<Estacion>>() {
+        MiCarroDB.getINSTANCE(contexto).miVehiculosDao().listarModelos().observeForever(
+                new Observer<List<Modelo>>() {
                     @Override
-                    public void onChanged(@Nullable List<Estacion> estaciones) {
-                        estacionList = estaciones;
+                    public void onChanged(@Nullable List<Modelo> modelos) {
+                        modeloList = modelos;
                         notifyDataSetChanged();
                     }
                 }
@@ -38,7 +37,7 @@ public class EstacionesViewBasicoAdapter extends RecyclerView.Adapter<Estaciones
 
     @NonNull
     @Override
-    public EstacionesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public ModelosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         contexto = parent.getContext();
 
         LayoutInflater layoutInflater = LayoutInflater.from(contexto);
@@ -48,17 +47,17 @@ public class EstacionesViewBasicoAdapter extends RecyclerView.Adapter<Estaciones
 
         View view = layoutInflater.inflate(R.layout.list_view_basico_activity, parent, shouldAttachToParentImmediately);
 
-        return new EstacionesViewHolder(view);
+        return new ModelosViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EstacionesViewHolder holder, int position, @NonNull List<Object> payloads) {
+    public void onBindViewHolder(@NonNull ModelosViewHolder holder, int position, @NonNull List<Object> payloads) {
         super.onBindViewHolder(holder, position, payloads);
         holder.bind(position);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EstacionesViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull ModelosViewHolder holder, int i) {
 
         holder.bind(i);
     }
@@ -66,35 +65,31 @@ public class EstacionesViewBasicoAdapter extends RecyclerView.Adapter<Estaciones
 
     @Override
     public int getItemCount() {
-        if (estacionList != null) {
-            return estacionList.size();
+        if (modeloList != null) {
+            return modeloList.size();
         } else {
             return 0;
         }
     }
 
-    class EstacionesViewHolder extends RecyclerView.ViewHolder {
+    class ModelosViewHolder extends RecyclerView.ViewHolder {
         TextView nombre;
         CheckBox activo;
         ImageButton editFloatinActionButton;
 
-        public EstacionesViewHolder(@NonNull View itemView) {
+        public ModelosViewHolder(@NonNull View itemView) {
             super(itemView);
             nombre = (TextView) itemView.findViewById(R.id.nombreEditText);
             activo = (CheckBox) itemView.findViewById(R.id.activoCheckBox);
             editFloatinActionButton = itemView.findViewById(R.id.editFloatinActionButton);
+            activo.setVisibility(View.GONE);
+            editFloatinActionButton.setVisibility(View.GONE);
         }
 
         public void bind(int position) {
-            final Estacion estacion = estacionList.get(position);
-            nombre.setText(estacion.getNombre());
-            activo.setChecked(estacion.isActivo());
-            editFloatinActionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    contexto.startActivity(new Intent(contexto, AddEstacionesActivity.class).putExtra("nombreEstacion", estacion.getNombre()));
-                }
-            });
+            final Modelo modelo = modeloList.get(position);
+            nombre.setText(modelo.getMarca() + " " + modelo.getModelo() + " " + modelo.getAnio());
+
 
         }
     }

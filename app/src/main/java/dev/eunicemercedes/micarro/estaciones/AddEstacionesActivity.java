@@ -17,7 +17,7 @@ public class AddEstacionesActivity extends AppCompatActivity {
     TextView nombre;
     CheckBox activo;
     ImageButton editFloatinActionButton;
-    Estaciones estacion;
+    Estacion estacion;
     private boolean editMode;
 
     public void setEstacion(final String nombreEstacion) {
@@ -37,7 +37,7 @@ public class AddEstacionesActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (nombre.getText().length() > 0) {
                     if (estacion == null) {
-                        estacion = new Estaciones(nombre.getText().toString(),
+                        estacion = new Estacion(nombre.getText().toString(),
                                 activo.isChecked());
                     } else {
                         estacion.setNombre(nombre.getText().toString());
@@ -83,11 +83,11 @@ public class AddEstacionesActivity extends AppCompatActivity {
 
     class ActualizarEstaciones extends AsyncTask<Void, Void, Boolean> {
         Context context;
-        Estaciones estacion;
+        Estacion estacion;
 
-        public ActualizarEstaciones(Context context, Estaciones estaciones) {
+        public ActualizarEstaciones(Context context, Estacion estacion) {
             this.context = context;
-            this.estacion = estaciones;
+            this.estacion = estacion;
         }
 
         @Override
@@ -105,10 +105,10 @@ public class AddEstacionesActivity extends AppCompatActivity {
         }
     }
 
-    class BuscarEstaciones extends AsyncTask<Void, Void, Estaciones> {
+    class BuscarEstaciones extends AsyncTask<Void, Void, Estacion> {
         Context context;
         String nombreEstacion;
-        Estaciones resultado;
+        Estacion resultado;
 
         public BuscarEstaciones(Context context, String nombreEstacion) {
             this.context = context;
@@ -116,7 +116,7 @@ public class AddEstacionesActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Estaciones doInBackground(Void... voids) {
+        protected Estacion doInBackground(Void... voids) {
 
             MiCarroDB.getINSTANCE(context).runInTransaction(
                     new Runnable() {
@@ -131,7 +131,7 @@ public class AddEstacionesActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Estaciones resultado) {
+        protected void onPostExecute(Estacion resultado) {
             if (resultado != null) {
                 nombre.setText(resultado.getNombre());
                 activo.setChecked(resultado.isActivo());

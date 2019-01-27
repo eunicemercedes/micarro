@@ -5,7 +5,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "MetodoDePago")
+@Entity(tableName = "MetodosDePago")
 public class MetodoDePago {
 
     @PrimaryKey(autoGenerate = true)

@@ -7,7 +7,7 @@ import android.arch.persistence.room.PrimaryKey;
 import java.util.Date;
 
 @Entity(tableName = "Estaciones")
-public class Estaciones {
+public class Estacion {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "CodigoEstacion")
@@ -19,7 +19,7 @@ public class Estaciones {
     @ColumnInfo(name = "Activo")
     private boolean activo;
 
-    public Estaciones(String nombre, boolean activo) {
+    public Estacion(String nombre, boolean activo) {
         this.nombre = nombre;
         this.activo = activo;
     }
@@ -34,7 +34,7 @@ public class Estaciones {
 
     @Override
     public String toString() {
-        return "Estaciones{" +
+        return "Estacion{" +
                 "codigoEstacion=" + codigoEstacion +
                 ", nombre='" + nombre + '\'' +
                 ", activo=" + activo +
