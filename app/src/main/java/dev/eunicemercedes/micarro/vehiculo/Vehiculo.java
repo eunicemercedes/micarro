@@ -2,6 +2,7 @@ package dev.eunicemercedes.micarro.vehiculo;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.time.Instant;
@@ -27,6 +28,12 @@ public class Vehiculo {
     public Vehiculo(int idModelo, String nombre, boolean activo) {
 
         this.idModelo = idModelo;
+        this.nombre = nombre;
+        this.activo = activo;
+    }
+
+    @Ignore
+    public Vehiculo(String nombre, boolean activo) {
         this.nombre = nombre;
         this.activo = activo;
     }

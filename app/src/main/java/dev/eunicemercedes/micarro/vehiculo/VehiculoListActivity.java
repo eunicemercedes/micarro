@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -51,15 +53,19 @@ public class VehiculoListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recycleview_basico_activity);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbarMenuPrincipal);
+        setSupportActionBar(toolbar);
+
         recyclerView = findViewById(R.id.recyclerViewBasico);
         FloatingActionButton floatingActionButton = findViewById(R.id.addFloatinActionButton);
 
         final VehiculoViewBasicoAdapter vehiculoAdapter =
                 new VehiculoViewBasicoAdapter(this);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(vehiculoAdapter);
 

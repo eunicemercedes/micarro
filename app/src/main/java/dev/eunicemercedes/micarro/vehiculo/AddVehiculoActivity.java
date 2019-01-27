@@ -4,13 +4,18 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import dev.eunicemercedes.micarro.MiCarroDB;
 import dev.eunicemercedes.micarro.R;
@@ -19,9 +24,9 @@ import dev.eunicemercedes.micarro.modelo.Modelo;
 public class AddVehiculoActivity extends AppCompatActivity {
     TextView nombre;
     CheckBox activo;
-    Spinner modelo;
-    Spinner marca;
-    Spinner anio;
+    Spinner modeloSpinner;
+    Spinner marcaSpinner;
+    Spinner anioSpinner;
     ImageButton editFloatinActionButton;
     Vehiculo vehiculo;
     private boolean editMode;
@@ -35,25 +40,65 @@ public class AddVehiculoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_mode_vehiculo_activity);
         editFloatinActionButton = findViewById(R.id.editButton);
-        nombre = findViewById(R.id.nombreEditText);
-        activo = findViewById(R.id.activoCheckBox);
+        nombre = findViewById(R.id.nombreVehiculoEditText);
+        activo = findViewById(R.id.activoVehiculoCheckBox);
+        modeloSpinner = findViewById(R.id.modeloSpinner);
+        marcaSpinner = findViewById(R.id.marcaSpinner);
+        anioSpinner = findViewById(R.id.anioSpinner);
+
 
         cargarDatos();
+        //llenar las marcas
+        new LlenarDropdown(this, "", "", "").execute();
+        marcaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                new LlenarDropdown(AddVehiculoActivity.this, parent.getItemAtPosition(position).toString(), "", "").execute();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        modeloSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                new LlenarDropdown(AddVehiculoActivity.this, marcaSpinner.getSelectedItem().toString(), parent.getItemAtPosition(position).toString(), "").execute();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        anioSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                new LlenarDropdown(AddVehiculoActivity.this, marcaSpinner.getSelectedItem().toString(), modeloSpinner.getSelectedItem().toString(), parent.getItemAtPosition(position).toString()).execute();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         editFloatinActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (nombre.getText().length() > 0) {
                     if (vehiculo == null) {
-                        //TODO: AGREGAR MODELO
-                        vehiculo = new Vehiculo(7470, nombre.getText().toString(), activo.isChecked());
+
+                        vehiculo = new Vehiculo(nombre.getText().toString(), activo.isChecked());
                     } else {
-                        //TODO:AGREGAR MODELO
                         vehiculo.setNombre(nombre.getText().toString());
                         vehiculo.setActivo(activo.isChecked());
                     }
                     new ActualizarVehiculo(AddVehiculoActivity.this, vehiculo).execute();
-
-
                 }
             }
         });
@@ -111,6 +156,11 @@ public class AddVehiculoActivity extends AppCompatActivity {
             );
             return true;
         }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            Toast.makeText(context, "Vehiculo Guardado", Toast.LENGTH_LONG).show();
+        }
     }
 
     class BuscarVehiculo extends AsyncTask<Void, Void, Vehiculo> {
@@ -154,5 +204,77 @@ public class AddVehiculoActivity extends AppCompatActivity {
             }
             vehiculo = resultado;
         }
+    }
+
+    class LlenarDropdown extends AsyncTask<Void, Void, Void> {
+        Context context;
+        String marca, modelo, anio;
+        List<String> lista;
+        int codigoModelo;
+
+        public LlenarDropdown(Context context, String marca, String modelo, String anio) {
+            this.context = context;
+            this.marca = marca;
+            this.modelo = modelo;
+            this.anio = anio;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            MiCarroDB.getINSTANCE(context).runInTransaction(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            if (marca.length() > 0 && modelo.length() > 0 && anio.length() > 0) {
+                                codigoModelo = MiCarroDB.getINSTANCE(context).miVehiculosDao().buscarCodigoModelo(marca, modelo, Integer.parseInt(anio));
+                            } else {
+                                if (marca.length() > 0 && modelo.length() > 0) {
+                                    lista = MiCarroDB.getINSTANCE(context).miVehiculosDao().listarAnios(marca, modelo);
+                                } else {
+                                    if (marca.length() > 0) {
+
+                                        lista = MiCarroDB.getINSTANCE(context).miVehiculosDao().listarModelos(marca);
+                                    } else {
+                                        lista = MiCarroDB.getINSTANCE(context).miVehiculosDao().listarMarcas();
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+            );
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+            if (marca.length() > 0 && modelo.length() > 0 && anio.length() > 0) {
+                if (vehiculo == null) {
+                    vehiculo = new Vehiculo("", false);
+                }
+                vehiculo.setIdModelo(codigoModelo);
+            } else {
+                if (marca.length() > 0 && modelo.length() > 0) {
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, lista);
+                    anioSpinner.setAdapter(adapter);
+
+                } else {
+                    if (marca.length() > 0) {
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, lista);
+                        modeloSpinner.setAdapter(adapter);
+
+                    } else {
+
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, lista);
+                        marcaSpinner.setAdapter(adapter);
+
+                    }
+                }
+            }
+
+        }
+
+
     }
 }
