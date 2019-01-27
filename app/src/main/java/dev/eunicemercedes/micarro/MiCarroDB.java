@@ -11,7 +11,7 @@ import dev.eunicemercedes.micarro.modelo.Modelo;
 import dev.eunicemercedes.micarro.tipomantenimiento.TipoMantenimiento;
 import dev.eunicemercedes.micarro.vehiculo.Vehiculo;
 
-@Database(entities = {Estacion.class, Mantenimientos.class, MetodoDePago.class, Modelo.class, TipoMantenimiento.class, Vehiculo.class}, version = 1)
+@Database(entities = {Estacion.class, Mantenimiento.class, MetodoDePago.class, Modelo.class, TipoMantenimiento.class, Vehiculo.class}, version = 1)
 public abstract class MiCarroDB extends RoomDatabase {
     private static MiCarroDB INSTANCE;
 

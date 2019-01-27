@@ -4,12 +4,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,6 +25,7 @@ public class AddVehiculoActivity extends AppCompatActivity {
     Spinner modeloSpinner;
     Spinner marcaSpinner;
     Spinner anioSpinner;
+    TextView label;
     ImageButton editFloatinActionButton;
     Vehiculo vehiculo;
     private boolean editMode;
@@ -42,14 +41,23 @@ public class AddVehiculoActivity extends AppCompatActivity {
         editFloatinActionButton = findViewById(R.id.editButton);
         nombre = findViewById(R.id.nombreVehiculoEditText);
         activo = findViewById(R.id.activoVehiculoCheckBox);
+        label = findViewById(R.id.textView4);
         modeloSpinner = findViewById(R.id.modeloSpinner);
         marcaSpinner = findViewById(R.id.marcaSpinner);
         anioSpinner = findViewById(R.id.anioSpinner);
 
 
         cargarDatos();
-        //llenar las marcas
-        new LlenarDropdown(this, "", "", "").execute();
+
+        if (editMode) {
+            ((TextView) findViewById(R.id.textView3)).setVisibility(View.GONE);
+            ((TextView) findViewById(R.id.textView5)).setVisibility(View.GONE);
+            modeloSpinner.setVisibility(View.GONE);
+            marcaSpinner.setVisibility(View.GONE);
+            anioSpinner.setVisibility(View.GONE);
+        } else {
+            new LlenarDropdown(this, "", "", "").execute();
+        }
         marcaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
 
@@ -197,7 +205,9 @@ public class AddVehiculoActivity extends AppCompatActivity {
             if (resultado != null) {
                 nombre.setText(resultado.getNombre());
                 activo.setChecked(resultado.isActivo());
-                //datosVehiculo.setText(modelo.toString());
+                if (modelo != null) {
+                    label.setText("Modelo: " + modelo.toString());
+                }
                 Toast.makeText(context, "Datos Cargados", Toast.LENGTH_LONG);
             } else {
                 Toast.makeText(context, "Datos NO Cargados", Toast.LENGTH_LONG);
