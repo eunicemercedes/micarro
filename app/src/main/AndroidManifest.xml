@@ -12,9 +12,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".estaciones.AddEstacionesActivity" />
-
         <activity android:name=".estaciones.EstacionesListActivity" />
-        <activity android:name=".modelo.ModeloListActivity">
+        <activity android:name=".vehiculo.VehiculoListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,6 +25,8 @@
         <activity android:name=".tipomantenimiento.TipoMantenimientoListActivity" />
         <activity android:name=".metododepago.AddMetodoDePagoActivity" />
         <activity android:name=".metododepago.MetodoDePagoListActivity" />
+        <activity android:name=".modelo.ModeloListActivity" />
+        <activity android:name=".vehiculo.AddVehiculoActivity" />
     </application>
 
 </manifest>

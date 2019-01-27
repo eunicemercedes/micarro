@@ -2,6 +2,9 @@
     <string name="app_name">MiCarro</string>
     <string name="label_nombre">Nombre</string>
     <string name="label_activo">Activo</string>
+    <string name="label_modelo">Seleccione Modelo</string>
+    <string name="label_marca">Seleccione Marca</string>
+    <string name="label_anio">Seleccione año</string>
     <string name="label_tipoPago">Metodo Pago</string>
     <string-array name="tipo_metodo_pago">
         <item>Efectivo</item>

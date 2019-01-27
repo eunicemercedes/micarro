@@ -37,12 +37,7 @@ public class Modelo {
 
     @Override
     public String toString() {
-        return "Modelo{" +
-                "idModelo=" + idModelo +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", anio='" + anio + '\'' +
-                '}';
+        return marca + '\t' + modelo + '\t' + anio;
     }
 
 

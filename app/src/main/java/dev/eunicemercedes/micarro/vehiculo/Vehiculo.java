@@ -10,7 +10,6 @@ import java.util.Date;
 @Entity(tableName = "Vehiculos")
 public class Vehiculo {
 
-
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "CodigoVehiculo")
     private int codigoVehiculo;
@@ -21,17 +20,14 @@ public class Vehiculo {
     @ColumnInfo(name = "Nombre")
     private String nombre;
 
-    @ColumnInfo(name = "FechaInicio")
-    private String fechaInicio;
 
     @ColumnInfo(name = "Activo")
     private boolean activo;
 
-    public Vehiculo(int idModelo, String nombre, String fechaInicio, boolean activo) {
+    public Vehiculo(int idModelo, String nombre, boolean activo) {
 
         this.idModelo = idModelo;
         this.nombre = nombre;
-        this.fechaInicio = fechaInicio;
         this.activo = activo;
     }
 
@@ -41,7 +37,6 @@ public class Vehiculo {
                 "codigoVehiculo=" + codigoVehiculo +
                 ", idModelo=" + idModelo +
                 ", nombre='" + nombre + '\'' +
-                ", fechaInicio=" + fechaInicio +
                 ", activo=" + activo +
                 '}';
     }
@@ -63,11 +58,19 @@ public class Vehiculo {
     }
 
 
-    public String getFechaInicio() {
-        return fechaInicio;
-    }
-
     public boolean isActivo() {
         return activo;
+    }
+
+    public void setIdModelo(int idModelo) {
+        this.idModelo = idModelo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 }

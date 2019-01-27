@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/configurar1"
+        android:title="Configurar">
+        <menu android:id="@+id/menuConfigurar">
+            <item
+                android:id="@+id/menuTipoMantenimiento"
+                android:title="Tipo Mantenimiento" />
+            <item
+                android:id="@+id/menuMetodoPago"
+                android:title="Metodos de Pago" />
+
+            <item
+                android:id="@+id/menuEstacione"
+                android:title="Estaciones" />
+        </menu>
+
+    </item>
+    <item
+        android:id="@+id/configurar2"
+        android:title="Adicionales">
+        <menu android:id="@+id/menuOtrasConfig">
+            <item
+                android:id="@+id/menuModelos"
+                android:title="Ver Modelos" />
+        </menu>
+
+    </item>
+</menu>
