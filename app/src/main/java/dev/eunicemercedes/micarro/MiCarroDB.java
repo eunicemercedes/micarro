@@ -6,8 +6,10 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import dev.eunicemercedes.micarro.estaciones.Estaciones;
+import dev.eunicemercedes.micarro.metododepago.MetodoDePago;
+import dev.eunicemercedes.micarro.tipomantenimiento.TipoMantenimiento;
 
-@Database(entities = {Estaciones.class, Mantenimientos.class, MetodosDePago.class, Modelos.class, TipoMantenimiento.class, Vehiculos.class}, version = 1)
+@Database(entities = {Estaciones.class, Mantenimientos.class, MetodoDePago.class, Modelos.class, TipoMantenimiento.class, Vehiculos.class}, version = 1)
 public abstract class MiCarroDB extends RoomDatabase {
     private static MiCarroDB INSTANCE;
 

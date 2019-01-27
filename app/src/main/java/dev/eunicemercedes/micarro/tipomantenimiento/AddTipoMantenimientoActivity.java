@@ -1,4 +1,4 @@
-package dev.eunicemercedes.micarro.estaciones;
+package dev.eunicemercedes.micarro.tipomantenimiento;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -13,15 +13,15 @@ import android.widget.Toast;
 import dev.eunicemercedes.micarro.MiCarroDB;
 import dev.eunicemercedes.micarro.R;
 
-public class AddEstacionesActivity extends AppCompatActivity {
+public class AddTipoMantenimientoActivity extends AppCompatActivity {
     TextView nombre;
     CheckBox activo;
     ImageButton editFloatinActionButton;
-    Estaciones estacion;
+    TipoMantenimiento tipoMantenimiento;
     private boolean editMode;
 
-    public void setEstacion(final String nombreEstacion) {
-        new BuscarEstaciones(this, nombreEstacion).execute();
+    public void setEstacion(final String nombreTipoMantenimiento) {
+        new BuscarTipoMantenimiento(this, nombreTipoMantenimiento).execute();
     }
 
     @Override
@@ -36,14 +36,14 @@ public class AddEstacionesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (nombre.getText().length() > 0) {
-                    if (estacion == null) {
-                        estacion = new Estaciones(nombre.getText().toString(),
+                    if (tipoMantenimiento == null) {
+                        tipoMantenimiento = new TipoMantenimiento(nombre.getText().toString(),
                                 activo.isChecked());
                     } else {
-                        estacion.setNombre(nombre.getText().toString());
-                        estacion.setActivo(activo.isChecked());
+                        tipoMantenimiento.setNombre(nombre.getText().toString());
+                        tipoMantenimiento.setActivo(activo.isChecked());
                     }
-                    new ActualizarEstaciones(AddEstacionesActivity.this, estacion).execute();
+                    new ActualizarTipoMantenimiento(AddTipoMantenimientoActivity.this, tipoMantenimiento).execute();
 
 
                 }
@@ -58,13 +58,13 @@ public class AddEstacionesActivity extends AppCompatActivity {
 
     public void cargarDatos() {
         if (getIntent() != null) {
-            String nombreEstacion = getIntent().getStringExtra("nombreEstacion");
-            if (nombreEstacion != null) {
-                if (nombreEstacion.length() > 0) {
-                    this.setEstacion(nombreEstacion);
-                    if (estacion != null) {
-                        nombre.setText(estacion.getNombre());
-                        activo.setChecked(estacion.isActivo());
+            String nombreTipoMantenimiento = getIntent().getStringExtra("nombreTipoMantenimiento");
+            if (nombreTipoMantenimiento != null) {
+                if (nombreTipoMantenimiento.length() > 0) {
+                    this.setEstacion(nombreTipoMantenimiento);
+                    if (tipoMantenimiento != null) {
+                        nombre.setText(tipoMantenimiento.getNombre());
+                        activo.setChecked(tipoMantenimiento.isActivo());
                         editMode = true;
                     } else {
                         limpiar();
@@ -81,13 +81,13 @@ public class AddEstacionesActivity extends AppCompatActivity {
         }
     }
 
-    class ActualizarEstaciones extends AsyncTask<Void, Void, Boolean> {
+    class ActualizarTipoMantenimiento extends AsyncTask<Void, Void, Boolean> {
         Context context;
-        Estaciones estacion;
+        TipoMantenimiento tipoMantenimiento;
 
-        public ActualizarEstaciones(Context context, Estaciones estaciones) {
+        public ActualizarTipoMantenimiento(Context context, TipoMantenimiento tipoMantenimiento) {
             this.context = context;
-            this.estacion = estaciones;
+            this.tipoMantenimiento = tipoMantenimiento;
         }
 
         @Override
@@ -96,7 +96,7 @@ public class AddEstacionesActivity extends AppCompatActivity {
                     new Runnable() {
                         @Override
                         public void run() {
-                            MiCarroDB.getINSTANCE(context).miVehiculosDao().agregarEstacion(estacion);
+                            MiCarroDB.getINSTANCE(context).miVehiculosDao().agregarTipoMantenimiento(tipoMantenimiento);
                         }
                     }
 
@@ -105,24 +105,24 @@ public class AddEstacionesActivity extends AppCompatActivity {
         }
     }
 
-    class BuscarEstaciones extends AsyncTask<Void, Void, Estaciones> {
+    class BuscarTipoMantenimiento extends AsyncTask<Void, Void, TipoMantenimiento> {
         Context context;
-        String nombreEstacion;
-        Estaciones resultado;
+        String nombreTipoMantenimiento;
+        TipoMantenimiento resultado;
 
-        public BuscarEstaciones(Context context, String nombreEstacion) {
+        public BuscarTipoMantenimiento(Context context, String nombreTipoMantenimiento) {
             this.context = context;
-            this.nombreEstacion = nombreEstacion;
+            this.nombreTipoMantenimiento = nombreTipoMantenimiento;
         }
 
         @Override
-        protected Estaciones doInBackground(Void... voids) {
+        protected TipoMantenimiento doInBackground(Void... voids) {
 
             MiCarroDB.getINSTANCE(context).runInTransaction(
                     new Runnable() {
                         @Override
                         public void run() {
-                            resultado = MiCarroDB.getINSTANCE(context).miVehiculosDao().listarEstaciones(nombreEstacion);
+                            resultado = MiCarroDB.getINSTANCE(context).miVehiculosDao().listarTipoMantenimiento(nombreTipoMantenimiento);
                         }
                     }
 
@@ -131,7 +131,7 @@ public class AddEstacionesActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Estaciones resultado) {
+        protected void onPostExecute(TipoMantenimiento resultado) {
             if (resultado != null) {
                 nombre.setText(resultado.getNombre());
                 activo.setChecked(resultado.isActivo());
@@ -139,7 +139,7 @@ public class AddEstacionesActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(context, "Datos NO Cargados", Toast.LENGTH_LONG);
             }
-            estacion = resultado;
+            tipoMantenimiento = resultado;
         }
     }
 }
