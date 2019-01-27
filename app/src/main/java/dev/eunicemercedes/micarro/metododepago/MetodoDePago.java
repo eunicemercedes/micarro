@@ -16,8 +16,47 @@ public class MetodoDePago {
     String nombre;
     //EFECTIVO - TARJETA - CREDITO - CUPON
     @ColumnInfo(name = "TipoMetodoPago")
-    String tipoMetodoPago;
+    int tipoMetodoPago;
 
     @ColumnInfo(name = "Activo")
     boolean activo;
+
+    public MetodoDePago(String nombre, int tipoMetodoPago, boolean activo) {
+        this.nombre = nombre;
+        this.tipoMetodoPago = tipoMetodoPago;
+        this.activo = activo;
+    }
+
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getTipoMetodoPago() {
+        return tipoMetodoPago;
+    }
+
+    public void setTipoMetodoPago(int tipoMetodoPago) {
+        this.tipoMetodoPago = tipoMetodoPago;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public int getCodigoMetodoPago() {
+        return codigoMetodoPago;
+    }
+
+    public void setCodigoMetodoPago(int codigoMetodoPago) {
+        this.codigoMetodoPago = codigoMetodoPago;
+    }
 }

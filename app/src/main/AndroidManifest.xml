@@ -13,14 +13,17 @@
         <activity android:name=".estaciones.AddEstacionesActivity" />
         <activity android:name=".estaciones.EstacionesListActivity" />
 
-        <activity android:name=".tipomantenimiento.TipoMantenimientoListActivity">
+        <activity android:name=".metododepago.MetodoDePagoListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            /
         </activity>
         <activity android:name=".tipomantenimiento.AddTipoMantenimientoActivity" />
+        <activity android:name=".tipomantenimiento.TipoMantenimientoListActivity" />
+        <activity android:name=".metododepago.AddMetodoDePagoActivity" />
     </application>
 
 </manifest>

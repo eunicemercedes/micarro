@@ -2,4 +2,10 @@
     <string name="app_name">MiCarro</string>
     <string name="label_nombre">Nombre</string>
     <string name="label_activo">Activo</string>
+    <string name="label_tipoPago">Metodo Pago</string>
+    <string-array name="tipo_metodo_pago">
+        <item>Efectivo</item>
+        <item>Tarjeta</item>
+        <item>Credito</item>
+    </string-array>
 </resources>
