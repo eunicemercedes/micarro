@@ -108,7 +108,7 @@ public class VehiculoViewBasicoAdapter extends RecyclerView.Adapter<VehiculoView
             editFloatinActionButton.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    contexto.startActivity(new Intent(contexto, AddMantenimientoActivity.class).putExtra("codigoVehiculo", vehiculo.getCodigoVehiculo()));
+                    contexto.startActivity(new Intent(contexto, AddMantenimientoActivity.class).putExtra("nombreVehiculo", vehiculo.getCodigoVehiculo()));
                     return false;
                 }
             });
