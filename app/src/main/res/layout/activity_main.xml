@@ -16,7 +16,6 @@
             android:id="@+id/toolbarMenuPrincipal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primaryColor"
             app:layout_scrollFlags="snap|exitUntilCollapsed" />
     </android.support.design.widget.AppBarLayout>
 

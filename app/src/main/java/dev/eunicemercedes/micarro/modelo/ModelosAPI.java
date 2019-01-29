@@ -19,7 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ModelosAPI {
 
-    final static String BASE_URL = "https://doc-10-0g-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/ckvjrsacm80f30df58cja8u1gu35l0fd/1548576000000/15963182392774467456/*/";//https://www.carqueryapi.com/api/0.3/
+
+    final static String BASE_URL = "https://doc-10-0g-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/4sh9ntjjkvvuh96h08n1spo92q7jfsr1/1548676800000/15963182392774467456/*/";
     public static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(

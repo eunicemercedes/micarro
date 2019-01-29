@@ -20,6 +20,7 @@ import java.util.List;
 
 import dev.eunicemercedes.micarro.MiCarroDB;
 import dev.eunicemercedes.micarro.R;
+import dev.eunicemercedes.micarro.mantenimiento.AddMantenimientoActivity;
 import dev.eunicemercedes.micarro.modelo.Modelo;
 
 
@@ -102,6 +103,13 @@ public class VehiculoViewBasicoAdapter extends RecyclerView.Adapter<VehiculoView
                 @Override
                 public void onClick(View v) {
                     contexto.startActivity(new Intent(contexto, AddVehiculoActivity.class).putExtra("nombreVehiculo", vehiculo.getNombre()));
+                }
+            });
+            editFloatinActionButton.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    contexto.startActivity(new Intent(contexto, AddMantenimientoActivity.class).putExtra("codigoVehiculo", vehiculo.getCodigoVehiculo()));
+                    return false;
                 }
             });
 

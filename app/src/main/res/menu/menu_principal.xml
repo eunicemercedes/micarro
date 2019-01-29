@@ -3,7 +3,7 @@
     android:id="@+id/menuPrincipal">
     <item
         android:id="@+id/configurar1"
-        android:title="Configurar">
+        android:title="Configuraciones">
         <menu android:id="@+id/menuConfigurar">
             <item
                 android:id="@+id/menuTipoMantenimiento"
@@ -11,7 +11,6 @@
             <item
                 android:id="@+id/menuMetodoPago"
                 android:title="Metodos de Pago" />
-
             <item
                 android:id="@+id/menuEstacione"
                 android:title="Estaciones" />
@@ -20,11 +19,14 @@
     </item>
     <item
         android:id="@+id/configurar2"
-        android:title="Adicionales">
+        android:title="Otras Opciones">
         <menu android:id="@+id/menuOtrasConfig">
             <item
                 android:id="@+id/menuModelos"
                 android:title="Ver Modelos" />
+            <item
+                android:id="@+id/menuOtrosSettings"
+                android:title="Mas Configuraciones" />
         </menu>
 
     </item>

@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import dev.eunicemercedes.micarro.R;
+import dev.eunicemercedes.micarro.SettingsActivity;
 import dev.eunicemercedes.micarro.estaciones.EstacionesListActivity;
 import dev.eunicemercedes.micarro.metododepago.MetodoDePagoListActivity;
 import dev.eunicemercedes.micarro.modelo.ModeloListActivity;
@@ -44,6 +45,9 @@ public class VehiculoListActivity extends AppCompatActivity {
                 return true;
             case R.id.menuTipoMantenimiento:
                 startActivity(new Intent(this, TipoMantenimientoListActivity.class));
+                return true;
+            case R.id.menuOtrosSettings:
+                startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

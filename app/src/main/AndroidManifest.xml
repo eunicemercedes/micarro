@@ -3,6 +3,7 @@
     package="dev.eunicemercedes.micarro">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,6 +28,8 @@
         <activity android:name=".metododepago.MetodoDePagoListActivity" />
         <activity android:name=".modelo.ModeloListActivity" />
         <activity android:name=".vehiculo.AddVehiculoActivity" />
+        <activity android:name=".mantenimiento.AddMantenimientoActivity" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>

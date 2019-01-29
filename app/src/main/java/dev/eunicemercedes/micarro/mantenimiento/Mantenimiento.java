@@ -1,4 +1,4 @@
-package dev.eunicemercedes.micarro;
+package dev.eunicemercedes.micarro.mantenimiento;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -24,13 +24,6 @@ public class Mantenimiento {
     @ColumnInfo(name = "ModoMantenimiento")
     int modoMantenimiento;//PREVENTIVO - CORRECTIVO - CONSUMO
 
-    @ColumnInfo(name = "Nombre")
-    String nombre;
-
-
-    //EFECTIVO - TARJETA - CREDITO - CUPON
-    @ColumnInfo(name = "TipoMetodoPago")
-    String tipoMetodoPago;
 
     @ColumnInfo(name = "Kilometraje")
     Double kilometrajeActual;
@@ -50,13 +43,11 @@ public class Mantenimiento {
     @ColumnInfo(name = "Comentario")
     String comentario;
 
-    public Mantenimiento(int codigoVehiculo, int codigoEstaciones, int codigoTipoMantenimiento, int modoMantenimiento, String nombre, String tipoMetodoPago, Double kilometrajeActual, int codigoMetodoPago, double cantidad, double costo, double kilometrajeProximoMantenimiento, String comentario) {
+    public Mantenimiento(int codigoVehiculo, int codigoEstaciones, int codigoTipoMantenimiento, int modoMantenimiento, Double kilometrajeActual, int codigoMetodoPago, double cantidad, double costo, double kilometrajeProximoMantenimiento, String comentario) {
         this.codigoVehiculo = codigoVehiculo;
         this.codigoEstaciones = codigoEstaciones;
         this.codigoTipoMantenimiento = codigoTipoMantenimiento;
         this.modoMantenimiento = modoMantenimiento;
-        this.nombre = nombre;
-        this.tipoMetodoPago = tipoMetodoPago;
         this.kilometrajeActual = kilometrajeActual;
         this.codigoMetodoPago = codigoMetodoPago;
         this.cantidad = cantidad;
@@ -66,13 +57,11 @@ public class Mantenimiento {
     }
 
     @Ignore
-    public Mantenimiento(int codigoVehiculo, int codigoEstaciones, int codigoTipoMantenimiento, int modoMantenimiento, String nombre, String tipoMetodoPago, Double kilometrajeActual, int codigoMetodoPago, double cantidad, double costo, String comentario) {
+    public Mantenimiento(int codigoVehiculo, int codigoEstaciones, int codigoTipoMantenimiento, int modoMantenimiento, Double kilometrajeActual, int codigoMetodoPago, double cantidad, double costo, String comentario) {
         this.codigoVehiculo = codigoVehiculo;
         this.codigoEstaciones = codigoEstaciones;
         this.codigoTipoMantenimiento = codigoTipoMantenimiento;
         this.modoMantenimiento = modoMantenimiento;
-        this.nombre = nombre;
-        this.tipoMetodoPago = tipoMetodoPago;
         this.kilometrajeActual = kilometrajeActual;
         this.codigoMetodoPago = codigoMetodoPago;
         this.cantidad = cantidad;
@@ -120,21 +109,6 @@ public class Mantenimiento {
         this.modoMantenimiento = modoMantenimiento;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getTipoMetodoPago() {
-        return tipoMetodoPago;
-    }
-
-    public void setTipoMetodoPago(String tipoMetodoPago) {
-        this.tipoMetodoPago = tipoMetodoPago;
-    }
 
     public Double getKilometrajeActual() {
         return kilometrajeActual;

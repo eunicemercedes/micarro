@@ -11,4 +11,20 @@
         <item>Tarjeta</item>
         <item>Credito</item>
     </string-array>
+    <string-array name="modo_mantenimiento">
+        <item>PREVENTIVO</item>
+        <item>CORRECTIVO</item>
+        <item>CONSUMO</item>
+    </string-array>
+    <string name="label_estacion">Seleccione Estacion</string>
+    <string name="label_tipoMant">Seleccione Tipo Mantenimiento</string>
+    <string name="label_modoMant">Seleccione Modo Mantenimiento</string>
+    <string name="label_metodoPago">Seleccione Metodo Pago</string>
+    <string name="label_cantidad">Cantidad</string>
+
+    <string name="label_costo">Costo</string>
+    <string name="label_kilometraje">KM</string>
+    <string name="label_kilometrajeProximo">KM Proximo Mant</string>
+    <string name="label_comentario">Notas</string>
+
 </resources>

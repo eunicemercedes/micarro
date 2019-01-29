@@ -103,7 +103,8 @@ public class AddMetodoDePagoActivity extends AppCompatActivity {
                     new Runnable() {
                         @Override
                         public void run() {
-                            MiCarroDB.getINSTANCE(context).miVehiculosDao().agregarMetodoPago(metodoDePago);
+                            MiCarroDB.getINSTANCE(context)
+                                    .miVehiculosDao().agregarMetodoPago(metodoDePago);
                         }
                     }
 
